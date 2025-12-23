@@ -26,36 +26,26 @@ public class InputManager : MonoBehaviour
     //private InputAction selectAction;
     
     private void Awake(){
-      // Check Signleton
+      // Check Singleton
       if(Instance == null) Instance = this;
       else if(Instance != null) {
         Destroy(this);
         Debug.LogWarning("Cannot have more than one copy of InputManager");
       }
-
-      // Initialze Members (Variables)
-      // By accessing the InputActions variable, call the FindAction var and pass in the select action as the argument.
-      // Assign the output of this function to the SelectionAction var
-
-      //selectAction = inputActions.FindAction("Select");
-    }
-  
-    // Create the built in function OnEnable, make it private with no parameters
-    private void OnEnable(){
-      // When this script is enabled, find the Player action map and enabled it to be used
-      //inputActions.FindActionMap("Player").Enable();
-    }
-
-    // When this script is disabled, find the Player action map and disable it
-    private void OnDisable(){
-      //inputActions.FindActionMap("Player").Disable();
     }
 
     public void Spin(){
+      if (GameManager.Instance.amountSpun >= GameManager.Instance.maxSpins){
+          Debug.Log("No Spins Remaining!");
+          return;
+      }
+
       // Randomly select an element from the roulette Wheel list, store that element in a variable
       int randomSlot = GetRandomElementFromList<int>(rouletteWheelList);
       // Print that output to the console
       Debug.Log(randomSlot);
+      // Add points to the score
+      ScoreManager.Instance.EarnPoints(randomSlot);
     }
 
     private T GetRandomElementFromList<T>(List<T> list){
