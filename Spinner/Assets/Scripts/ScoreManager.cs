@@ -1,12 +1,11 @@
 using UnityEngine;
-using TMPro;
+
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance {get; private set;}
 
     public int playerScore;
-    [SerializeField] private TextMeshProUGUI scoreText; 
 
     private void Awake()
     {
@@ -23,10 +22,9 @@ public class ScoreManager : MonoBehaviour
 
     // Create a public function to add points to the score, it takes an int as a parameter for how many points to add
     public void EarnPoints(int points){
+        if (GameManager.gameIsOver) return;
+
         // Add points to playerScore
         playerScore += points;
-        // Udpate the score text
-        scoreText.text = playerScore.ToString();
     }
-
 }
