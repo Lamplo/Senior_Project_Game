@@ -10,11 +10,31 @@ public abstract class BaseTrinket : MonoBehaviour, Itrinket
 
     protected TrinketData data; // Ref to scriptable object
 
-    protected TrinketType trinketType = TrinketType.Consumable;
+    [SerializeField] protected TrinketType trinketType = TrinketType.Consumable;
 
-    protected virtual void ApplyTrinketAffect()
+    protected void Start()
+    {
+        // Check the type of consumeable and handle its logic
+        switch (trinketType)
+        {
+            case TrinketType.Passive:
+            // If the trinket is a passive, apply its effect immediately
+            ApplyTrinketEffect();
+            break;
+            case TrinketType.Consumable:
+            // Handle consumeable logic
+            break;
+        }
+    }
+
+    public virtual void ApplyTrinketEffect()
     {
         Debug.Log($"{data.trinketName}");
+    }
+
+    public TrinketType GetType()
+    {
+        return trinketType;
     }
 
 }

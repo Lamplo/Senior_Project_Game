@@ -9,6 +9,8 @@ public class RouletteWheel : MonoBehaviour
     private List<int> rouletteWheelList = new List<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36};
     [SerializeField]
     private int pointMulitplier = 1;
+    private int pointsAdded = 0; // New
+    public bool isSpun = false; // New
 
     private void Awake(){
       // Check Singleton
@@ -16,19 +18,28 @@ public class RouletteWheel : MonoBehaviour
       else if(Instance != null) {
         Destroy(this);
       }
+
+      // Reset spin
+      isSpun = false;
     }
 
     public void Spin(){
-      if (GameManager.gameIsOver) return;
+
+      if (GameManager.gameIsOver) return; // Do nothing if the game is over
+      if (isSpun) return; // Prevent a new spin while the wheel is currently spinning
+
+      isSpun = true; // New
 
       // Randomly select an element from the roulette Wheel list, store that element in a variable
       int randomSlot = GetRandomElementFromList<int>(rouletteWheelList);
       // Print that output to the console
-      Debug.Log(randomSlot * pointMulitplier);
+      Debug.Log((randomSlot + pointsAdded) * pointMulitplier); // New
       // Add points to the score
-      ScoreManager.Instance.EarnPoints(randomSlot * pointMulitplier);
+      ScoreManager.Instance.EarnPoints((randomSlot + pointsAdded) * pointMulitplier); // New
       // Reset the multiplier
       pointMulitplier = 1;
+
+      isSpun = false; // New
     }
 
     private T GetRandomElementFromList<T>(List<T> list)
@@ -48,7 +59,11 @@ public class RouletteWheel : MonoBehaviour
     }
 
     public void ApplyMultiplier(int newMultiplier){
-      // Takes in an int and sets the multipler for the next spin to that number
+      // Takes in an int and sets the multipler for the next isSpun to that number
       pointMulitplier = newMultiplier;
+    }
+
+    public void ApplyAdd(int newAdd){ // New
+      pointsAdded = newAdd; // New
     }
 }

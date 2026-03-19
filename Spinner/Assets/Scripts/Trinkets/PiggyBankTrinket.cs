@@ -5,12 +5,12 @@ public class PiggyBankTrinket : BaseTrinket
     [SerializeField, Tooltip("The point multiplier this trinket applies to the next spin.")]
     protected int pointMulitplier = 2;
 
-    protected override void ApplyTrinketAffect()
+    public override void ApplyTrinketEffect()
     {
         if (GameManager.gameIsOver) return; 
         // Add the mulitplier to the next spin
         RouletteWheel.Instance.ApplyMultiplier(pointMulitplier);
-        Debug.Log($"Roluette multiplier set to {pointMulitplier}");
+        Debug.Log($"Roulette multiplier set to {pointMulitplier}");
     }
 
     private void Update(){
@@ -19,7 +19,7 @@ public class PiggyBankTrinket : BaseTrinket
         // Check for input
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ApplyTrinketAffect();
+            ApplyTrinketEffect();
             Destroy(gameObject);
         }
     }    
