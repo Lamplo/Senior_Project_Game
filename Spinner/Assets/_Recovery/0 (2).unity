@@ -988,7 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6ae19b3e23a47ceaa5fe57d6bd6bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceTrinket
-  trinketType: 0
   pointsAdded: 5
 --- !u!1 &1137699901
 GameObject:
@@ -1102,7 +1101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6456f12010648ff9ae42421a2a17d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PiggyBankTrinket
-  trinketType: 1
   pointMulitplier: 2
 --- !u!1 &1410655140
 GameObject:
@@ -1871,7 +1869,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1892237327}
   - component: {fileID: 1892237328}
-  - component: {fileID: 1892237329}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1907,21 +1904,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   remainingSpins: 3
---- !u!114 &1892237329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892237325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f064518a1a2418f8b66045bff16e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  equippedTrinkets:
-  - {fileID: 1365110559}
-  - {fileID: 1119425739}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
