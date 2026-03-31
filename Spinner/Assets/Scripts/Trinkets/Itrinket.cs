@@ -3,5 +3,5 @@ using UnityEngine;
 public interface Itrinket
 {
     // Apply Effect function
-    protected virtual void ApplyTrinketAffect(){}
+    void ModifyWheel(WheelContext context);
 }
