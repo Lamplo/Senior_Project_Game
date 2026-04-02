@@ -2,18 +2,19 @@ using UnityEngine;
 
 public enum SlotColor {
     Red, 
-    Black
+    Black,
+    Green
 }
 
 public class WheelSlot
 {
-    public int _number {get;  private set;}
-    public SlotColor _color {get; private set;}
+    public int number {get;  private set;}
+    public SlotColor color {get; private set;}
 
     // Constructor
     public WheelSlot(int baseNumber, SlotColor baseColor)
     {
-        _number = baseNumber;
-        _color = baseColor;
+        number = baseNumber;
+        color = baseColor;
     }
 }
