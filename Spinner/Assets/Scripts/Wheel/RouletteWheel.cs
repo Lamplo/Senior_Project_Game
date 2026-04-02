@@ -6,8 +6,8 @@ public class RouletteWheel : MonoBehaviour
      
     public static RouletteWheel Instance{get; private set;}
      
-    private List<int> rouletteWheelList = new List<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36};
-    [SerializeField]
+    private WheelContext _context;
+
     private int pointMulitplier = 1;
     private int pointsAdded = 0; // New
     public bool isSpun = false; // New
@@ -19,6 +19,8 @@ public class RouletteWheel : MonoBehaviour
         Destroy(this);
       }
 
+      // Create/Construct a new WheelContext and assing it to the _context
+      _context = new WheelContext();
       // Reset spin
       isSpun = false;
     }
@@ -31,7 +33,7 @@ public class RouletteWheel : MonoBehaviour
       isSpun = true; // New
 
       // Randomly select an element from the roulette Wheel list, store that element in a variable
-      int randomSlot = GetRandomElementFromList<int>(rouletteWheelList);
+      int randomSlot = GetRandomElementFromList<WheelSlot>(_context.slots).number;
       // Print that output to the console
       Debug.Log((randomSlot + pointsAdded) * pointMulitplier); // New
       // Add points to the score
