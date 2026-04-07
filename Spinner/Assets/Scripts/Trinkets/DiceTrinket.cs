@@ -13,6 +13,7 @@ public class DiceTrinket : BaseTrinket
         // Reassign the values here
         // Plug the new list back into the wheel context
         // Delete The Trinket
+        Debug.Log($"{this} modified the wheel!");
 
     }
 

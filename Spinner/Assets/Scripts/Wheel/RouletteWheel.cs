@@ -25,6 +25,11 @@ public class RouletteWheel : MonoBehaviour
       isSpun = false;
     }
 
+    private void Start(){
+      // Pass the wheel context to the Trinket Manager
+      TrinketManager.Instance.InitializeButtons(_context);
+    }
+
     public void Spin(){
 
       if (GameManager.gameIsOver) return; // Do nothing if the game is over
