@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class DiceTrinket : BaseTrinket
 {
-    [SerializeField, Tooltip("Adds + 5 to the score.")]
-    protected int pointsAdded = 5;
+    [SerializeField, Tooltip("Permanantly adds + 5 to the score.")]
+    protected int slotModifier = 5;
 
     public override void ModifyWheel(WheelContext context)
     {
-        // Change the slot numbers to 36
-        // Store the current list of slots
-        
-        // Reassign the values here
-        // Plug the new list back into the wheel context
-        // Delete The Trinket
+        // Access the wheell context and loop through each slot
+        foreach (WheelSlot slot in context.slots)
+        {
+            slot.SetNumber(slot.number + slotModifier);
+        }   
+
         Debug.Log($"{this} modified the wheel!");
 
     }

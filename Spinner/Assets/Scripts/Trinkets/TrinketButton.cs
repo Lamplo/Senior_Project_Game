@@ -36,9 +36,11 @@ public class TrinketButton : MonoBehaviour
             Debug.LogError("No wheel context assigned!");
             return;
         }
-
         AudioManager.Instance.PlaySound("Click");
         _trinket.ModifyWheel(_context);
+        Debug.Log("Button has been clicked");
+
+        // Despawn the button
     }
 
 }
