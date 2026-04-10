@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using TMPro;
 
 public class RouletteWheel : MonoBehaviour
 {
      
     public static RouletteWheel Instance{get; private set;}
+
+    [SerializeField] private List<TextMeshProUGUI> slotsUI = new List<TextMeshProUGUI>();
      
     private WheelContext _context;
 
@@ -28,6 +32,19 @@ public class RouletteWheel : MonoBehaviour
     private void Start(){
       // Pass the wheel context to the Trinket Manager
       TrinketManager.Instance.InitializeButtons(_context);
+      
+      // Safety check
+      if (_context.slots.Count != slotsUI.Count)
+      {
+          Debug.LogError("Slots and UI count mismatch!");
+          return;
+      }
+
+      // Assign each UI element to its corresponding slot
+      for (int i = 0; i < _context.slots.Count; i++)
+      {
+          _context.slots[i].SetUI(slotsUI[i]);
+      }
     }
 
     public void Spin(){

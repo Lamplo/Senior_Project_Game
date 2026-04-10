@@ -17,7 +17,6 @@ public class WheelContext
         slots = new List<WheelSlot>
         {
             new WheelSlot(0, SlotColor.Green),
-            
             new WheelSlot(1, SlotColor.Red),
             new WheelSlot(2, SlotColor.Black),
             new WheelSlot(3, SlotColor.Red),
@@ -35,28 +34,6 @@ public class WheelContext
             new WheelSlot(14, SlotColor.Black),
             new WheelSlot(15, SlotColor.Red),
             new WheelSlot(16, SlotColor.Black),
-            new WheelSlot(17, SlotColor.Red),
-            new WheelSlot(18, SlotColor.Black),
-
-            new WheelSlot(19, SlotColor.Red),
-            new WheelSlot(20, SlotColor.Black),
-            new WheelSlot(21, SlotColor.Red),
-            new WheelSlot(22, SlotColor.Black),
-            new WheelSlot(23, SlotColor.Red),
-            new WheelSlot(24, SlotColor.Black),
-            new WheelSlot(25, SlotColor.Red),
-            new WheelSlot(26, SlotColor.Black),
-            new WheelSlot(27, SlotColor.Red),
-
-            new WheelSlot(28, SlotColor.Black),
-            new WheelSlot(29, SlotColor.Red),
-            new WheelSlot(30, SlotColor.Black),
-            new WheelSlot(31, SlotColor.Red),
-            new WheelSlot(32, SlotColor.Black),
-            new WheelSlot(33, SlotColor.Red),
-            new WheelSlot(34, SlotColor.Black),
-            new WheelSlot(35, SlotColor.Red),
-            new WheelSlot(36, SlotColor.Black),
         };
     }
 

@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         // Play the music
         PlaySound("Music");
+        PlaySound("Noise");
     }
 
     public void PlaySound(string soundName)

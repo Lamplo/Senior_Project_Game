@@ -17,6 +17,7 @@ public class TrinketManager : MonoBehaviour
         }
     }
 
+
     public void InitializeButtons(WheelContext cxt){
         if (cxt == null){
             Debug.LogError("wheel context is null!");

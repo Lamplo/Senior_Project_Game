@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
    // A variable to track the number of spins on the level
    public int remainingSpins = 3;
    // A var to track the points needed to beat the level
-   private int pointsRequired = 20;
+   private int pointsRequired = 100;
 
    public static bool gameIsOver = false;
 
