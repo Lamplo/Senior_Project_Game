@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour
         gameIsOver = false;
     }   
 
+    public void AddSpin(int value)
+    {
+        remainingSpins += value;
+        UIManager.Instance.UpdateUI(ScoreManager.Instance.playerScore, remainingSpins);
+    }
+
     public void Spin()
     {
         if (gameIsOver) return;

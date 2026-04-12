@@ -13,7 +13,8 @@ public abstract class BaseTrinket : MonoBehaviour, Itrinket
 
     [SerializeField] protected TrinketType trinketType = TrinketType.Consumable;
 
-    public abstract void ModifyWheel(WheelContext context);
+    public virtual void ModifyWheel(WheelContext context){}
+    public virtual void ModifySpin(SpinContext spinContext){}
 
     public virtual TrinketType GetType()
     {

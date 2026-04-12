@@ -10,7 +10,8 @@ public class RouletteWheel : MonoBehaviour
 
     [SerializeField] private List<TextMeshProUGUI> slotsUI = new List<TextMeshProUGUI>();
      
-    private WheelContext _context;
+    private WheelContext _wheelContext;
+    private SpinContext _spinContext;
 
     private int pointMulitplier = 1;
     private int pointsAdded = 0; // New
@@ -24,26 +25,28 @@ public class RouletteWheel : MonoBehaviour
       }
 
       // Create/Construct a new WheelContext and assing it to the _context
-      _context = new WheelContext();
+      _wheelContext = new WheelContext();
+
+      _spinContext = new SpinContext(0);
       // Reset spin
       isSpun = false;
     }
 
     private void Start(){
       // Pass the wheel context to the Trinket Manager
-      TrinketManager.Instance.InitializeButtons(_context);
+      TrinketManager.Instance.InitializeButtons(_wheelContext, _spinContext);
       
       // Safety check
-      if (_context.slots.Count != slotsUI.Count)
+      if (_wheelContext.slots.Count != slotsUI.Count)
       {
           Debug.LogError("Slots and UI count mismatch!");
           return;
       }
 
       // Assign each UI element to its corresponding slot
-      for (int i = 0; i < _context.slots.Count; i++)
+      for (int i = 0; i < _wheelContext.slots.Count; i++)
       {
-          _context.slots[i].SetUI(slotsUI[i]);
+          _wheelContext.slots[i].SetUI(slotsUI[i]);
       }
     }
 
@@ -55,7 +58,11 @@ public class RouletteWheel : MonoBehaviour
       isSpun = true; // New
 
       // Randomly select an element from the roulette Wheel list, store that element in a variable
-      int randomSlot = GetRandomElementFromList<WheelSlot>(_context.slots).number;
+      int randomSlot = GetRandomElementFromList<WheelSlot>(_wheelContext.slots).number;
+      // Update the spin context
+      _spinContext.SetValue(randomSlot);
+      // Resolve the SpinContext & modifiers
+      randomSlot = _spinContext.Resolve();
       // Print that output to the console
       Debug.Log((randomSlot + pointsAdded) * pointMulitplier); // New
       // Add points to the score
@@ -64,6 +71,7 @@ public class RouletteWheel : MonoBehaviour
       pointMulitplier = 1;
 
       isSpun = false; // New
+      _spinContext.Reset();
     }
 
     private T GetRandomElementFromList<T>(List<T> list)
@@ -80,14 +88,5 @@ public class RouletteWheel : MonoBehaviour
       // Use that random to select an element from the list by its index
       return list[randomIndex];
       // Return that element from the list
-    }
-
-    public void ApplyMultiplier(int newMultiplier){
-      // Takes in an int and sets the multipler for the next isSpun to that number
-      pointMulitplier = newMultiplier;
-    }
-
-    public void ApplyAdd(int newAdd){ // New
-      pointsAdded = newAdd; // New
     }
 }

@@ -18,14 +18,19 @@ public class TrinketManager : MonoBehaviour
     }
 
 
-    public void InitializeButtons(WheelContext cxt){
-        if (cxt == null){
+    public void InitializeButtons(WheelContext wheelContext, SpinContext spinContext){
+        if (wheelContext == null){
             Debug.LogError("wheel context is null!");
             return;
         }
 
+        if (spinContext == null){
+            Debug.LogError("spin context is null!");
+            return;
+        }
+
         foreach (TrinketButton button in _trinketButtons){
-            button.Initialize(cxt);
+            button.Initialize(wheelContext, spinContext);
         }
     }
 

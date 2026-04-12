@@ -7,7 +7,8 @@ public class TrinketButton : MonoBehaviour
 
     [SerializeField] BaseTrinket _trinket;
 
-    private WheelContext _context;
+    private WheelContext _wheelContext;
+    private SpinContext _spinContext;
 
     private void Awake(){
         _button = GetComponent<Button>();
@@ -18,26 +19,21 @@ public class TrinketButton : MonoBehaviour
         TrinketManager.Instance.RegisterButton(this);
     }
 
-    public void Initialize(WheelContext context)
+    public void Initialize(WheelContext wheelContext, SpinContext spinContext)
     {
-        if (context == null){
-            Debug.LogError("Wheel context is null!");
-            return;
-        }
 
-        _context = context;
+        _wheelContext = wheelContext;
+        _spinContext = spinContext;
 
         // register a click listener
         _button.onClick.AddListener(OnClicked);
     }
 
     private void OnClicked(){
-        if (_context == null){
-            Debug.LogError("No wheel context assigned!");
-            return;
-        }
+
         AudioManager.Instance.PlaySound("Click");
-        _trinket.ModifyWheel(_context);
+        _trinket.ModifyWheel(_wheelContext);
+        _trinket.ModifySpin(_spinContext);
         Debug.Log("Button has been clicked");
 
         // Despawn the button
