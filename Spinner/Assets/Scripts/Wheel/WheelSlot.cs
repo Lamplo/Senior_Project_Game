@@ -26,7 +26,6 @@ public class WheelSlot
     {
         if (slotUI == null)
         {
-            Debug.LogWarning("Slot UI missing!");
             return;
         }
 
