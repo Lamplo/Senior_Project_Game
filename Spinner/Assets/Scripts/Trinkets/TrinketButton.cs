@@ -37,6 +37,7 @@ public class TrinketButton : MonoBehaviour
         Debug.Log("Button has been clicked");
 
         // Despawn the button
-    }
+        Destroy(gameObject);
+    }   
 
 }
