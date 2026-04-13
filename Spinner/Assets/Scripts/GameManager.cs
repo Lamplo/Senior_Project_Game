@@ -52,9 +52,11 @@ public class GameManager : MonoBehaviour
              // If it if is, calculate if player won
              if (ScoreManager.Instance.playerScore >= pointsRequired)
              {
+                UIManager.Instance.WinGame();
                 Debug.Log("You Win");
              }
              else {
+                UIManager.Instance.LoseGame();
                 Debug.Log("You Lose!");
              }
         }
