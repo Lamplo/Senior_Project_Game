@@ -12,9 +12,6 @@ public class RouletteWheel : MonoBehaviour
      
     private WheelContext _wheelContext;
     private SpinContext _spinContext;
-
-    private int pointMulitplier = 1;
-    private int pointsAdded = 0; // New
     public bool isSpun = false; // New
 
     private void Awake(){
@@ -50,28 +47,27 @@ public class RouletteWheel : MonoBehaviour
       }
     }
 
-    public void Spin(){
+    public void Spin()
+    {
+      if (GameManager.gameIsOver || isSpun) return;
 
-      if (GameManager.gameIsOver) return; // Do nothing if the game is over
-      if (isSpun) return; // Prevent a new spin while the wheel is currently spinning
+      isSpun = true;
 
-      isSpun = true; // New
+      var slot = GetRandomElementFromList<WheelSlot>(_wheelContext.slots).number;
 
-      // Randomly select an element from the roulette Wheel list, store that element in a variable
-      int randomSlot = GetRandomElementFromList<WheelSlot>(_wheelContext.slots).number;
-      // Update the spin context
-      _spinContext.SetValue(randomSlot);
-      // Resolve the SpinContext & modifiers
-      randomSlot = _spinContext.Resolve();
-      // Print that output to the console
-      Debug.Log((randomSlot + pointsAdded) * pointMulitplier); // New
-      // Add points to the score
-      ScoreManager.Instance.EarnPoints((randomSlot + pointsAdded) * pointMulitplier); // New
-      // Reset the multiplier
-      pointMulitplier = 1;
+      _spinContext.SetValue(slot);
 
-      isSpun = false; // New
+      int finalValue = _spinContext.Resolve();
+
+      int totalPoints = finalValue; // central truth
+
+      Debug.Log($"Final Spin Value: {totalPoints}");
+
+      ScoreManager.Instance.EarnPoints(slot);
+
       _spinContext.Reset();
+
+      isSpun = false;
     }
 
     private T GetRandomElementFromList<T>(List<T> list)

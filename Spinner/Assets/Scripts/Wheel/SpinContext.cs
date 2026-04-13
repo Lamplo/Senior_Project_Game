@@ -10,15 +10,13 @@ public class SpinContext
     public SpinContext(int baseValue)
     {
         this.baseValue = baseValue;
-        finalValue = baseValue;
         Debug.Log($"Base Value: {baseValue}");
     }
 
     public void SetValue(int value)
     {
         this.baseValue = value;
-        finalValue = value;
-        Debug.Log($"Spun Value before spin modifier: {finalValue}");
+        Debug.Log($"Spun Value before spin modifier: {baseValue}");
     }
 
     public int Resolve()
@@ -30,7 +28,7 @@ public class SpinContext
     public void Reset()
     {
         baseValue = 0;
-        finalValue = baseValue;
+        finalValue = 0;
         multiplier = 1; 
         additive = 0;
     }
