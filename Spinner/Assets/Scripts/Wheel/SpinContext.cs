@@ -25,6 +25,12 @@ public class SpinContext
         return finalValue;
     }
 
+    public void SetMultiplier(int newMultiplier)
+    {
+        multiplier = newMultiplier;
+        Debug.Log($"The next spin has a new mulitplier of {multiplier}");
+    }
+
     public void Reset()
     {
         baseValue = 0;

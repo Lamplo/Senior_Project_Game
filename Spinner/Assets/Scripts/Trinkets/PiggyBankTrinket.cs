@@ -7,7 +7,7 @@ public class PiggyBankTrinket : BaseTrinket
 
     public override void ModifySpin(SpinContext context)
     {
-        context.multiplier = pointMulitplier; 
+        context.SetMultiplier(pointMulitplier);
     }
    
 }
