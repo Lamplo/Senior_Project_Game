@@ -53,36 +53,46 @@ public class RouletteWheel : MonoBehaviour
 
       isSpun = true;
 
-      var slot = GetRandomElementFromList<WheelSlot>(_wheelContext.slots).number;
+      // Storing a random wheel slot from the wheel context's list of slots
+      WheelSlot slot = GetRandomSlotFromList(_wheelContext.slots);
 
-      _spinContext.SetValue(slot);
+      // Store the number on the selected wheel slot
+      int wheelValue = slot.number;
+      Debug.Log($"Wheel Spun: {slot}. Number Spun: {wheelValue}");
 
+      // Assign the wheel value to the spin context
+      _spinContext.SetValue(wheelValue);
+
+      // Calculate the earned points after the modifiers
       int finalValue = _spinContext.Resolve();
 
-      int totalPoints = finalValue; // central truth
+     //Debug.Log($"Final Spin Value: {finalValue}");
 
-      Debug.Log($"Final Spin Value: {totalPoints}");
-
-      ScoreManager.Instance.EarnPoints(slot);
+      // Earn points based on the final value 
+      ScoreManager.Instance.EarnPoints(finalValue);
 
       _spinContext.Reset();
+
+      // Trigger the spin of the GameManager
+      GameManager.Instance.Spin();
 
       isSpun = false;
     }
 
-    private T GetRandomElementFromList<T>(List<T> list)
+    private WheelSlot GetRandomSlotFromList(List<WheelSlot> wheelList)
     {
       // Check if the list is empty
-      if(list.Count == 0) {
+      if(wheelList.Count == 0) {
         // Return the default value for T
-        return default(T);
+        Debug.LogWarning("Wheel list is empty!");
+        return null;
       }
 
       // Generate a random number from 0 - [# of items in list]
-      int randomIndex = UnityEngine.Random.Range(0, list.Count);
+      int randomIndex = UnityEngine.Random.Range(0, wheelList.Count);
 
       // Use that random to select an element from the list by its index
-      return list[randomIndex];
+      return wheelList[randomIndex];
       // Return that element from the list
     }
 }
