@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject lostText;
     [SerializeField] private GameObject winText;
 
+    [SerializeField] private GameObject retryText;
+
     private void Awake(){
       // Check Singleton
       if(Instance == null) Instance = this;
@@ -20,6 +22,7 @@ public class UIManager : MonoBehaviour
 
       lostText.SetActive(false);
       winText.SetActive(false);
+      retryText.SetActive(false);
     }
 
     private void Start(){
@@ -27,7 +30,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateUI(int score, int spinsLeft){
-        if (GameManager.gameIsOver) return;
+        if (GameManager.gameIsOver)
+    {
+      return;
+    } 
 
         // Update the UI based on the spin of the wheel
         // Update the score text
@@ -35,7 +41,12 @@ public class UIManager : MonoBehaviour
         spinText.text = "Spins: " + spinsLeft.ToString();
     }
 
-    public void WinGame() => winText.SetActive(true);
-    public void LoseGame() => lostText.SetActive(true);
+    public void WinGame(){
+      winText.SetActive(true);
+      retryText.SetActive(true);
+      }
+    public void LoseGame(){
+      lostText.SetActive(true);
+      retryText.SetActive(true);}
 
 }
